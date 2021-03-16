@@ -41,6 +41,8 @@ public class AuthActivity extends AppCompatActivity {
 
         auth = FirebaseConfig.getAuthFirebase();
 
+        verifyLoggedUser();
+
         swAccess.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked) {
                 llUserType.setVisibility(View.VISIBLE);

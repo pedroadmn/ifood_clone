@@ -7,15 +7,15 @@ import android.os.Bundle;
 
 import pedroadmn.ifoodclone.com.R;
 
-public class NewCompanyProductActivity extends AppCompatActivity {
+public class UserSettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_company_product);
+        setContentView(R.layout.activity_user_settings);
 
         Toolbar toolbar = findViewById(R.id.idToolbar);
-        toolbar.setTitle("New Product");
+        toolbar.setTitle("User Settings");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

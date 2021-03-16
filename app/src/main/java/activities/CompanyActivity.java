@@ -27,7 +27,7 @@ public class CompanyActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseConfig.getAuthFirebase();
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.idToolbar);
         toolbar.setTitle("Ifood - company");
         setSupportActionBar(toolbar);
     }
@@ -35,7 +35,7 @@ public class CompanyActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.company_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
