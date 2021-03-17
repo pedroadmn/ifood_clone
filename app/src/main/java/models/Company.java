@@ -12,7 +12,7 @@ public class Company implements Serializable {
     private String name;
     private String time;
     private String category;
-    private String tax;
+    private double tax;
 
     public Company() {
     }
@@ -57,11 +57,11 @@ public class Company implements Serializable {
         this.category = category;
     }
 
-    public String getTax() {
+    public double getTax() {
         return tax;
     }
 
-    public void setTax(String tax) {
+    public void setTax(double tax) {
         this.tax = tax;
     }
 

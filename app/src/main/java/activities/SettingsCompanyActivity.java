@@ -9,12 +9,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
@@ -35,6 +41,7 @@ public class SettingsCompanyActivity extends AppCompatActivity {
     private static final int GALLERY_SELECTION = 200;
 
     private StorageReference storageReference;
+    private DatabaseReference firebaseRef;
 
     private String idLoggedUser;
 
@@ -48,6 +55,7 @@ public class SettingsCompanyActivity extends AppCompatActivity {
         initializeComponents();
 
         storageReference = FirebaseConfig.getFirebaseStorage();
+        firebaseRef = FirebaseConfig.getFirebase();
 
         idLoggedUser = FirebaseUserHelper.getUserId();
 
@@ -59,6 +67,8 @@ public class SettingsCompanyActivity extends AppCompatActivity {
         toolbar.setTitle("Company Settings");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getCompanyInformation();
     }
 
     private void initializeComponents() {
@@ -138,7 +148,7 @@ public class SettingsCompanyActivity extends AppCompatActivity {
                         company.setName(name);
                         company.setCategory(category);
                         company.setTime(time);
-                        company.setTax(tax);
+                        company.setTax(Double.parseDouble(tax));
                         company.setUrlImage(urlSelectedImage);
                         company.save();
                         finish();
@@ -164,5 +174,34 @@ public class SettingsCompanyActivity extends AppCompatActivity {
 
     private void saveCompany() {
         validateCompanyData();
+    }
+
+    private void getCompanyInformation() {
+        DatabaseReference companiesRef = firebaseRef.child("companies")
+                .child(idLoggedUser);
+
+        companiesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    Company company = snapshot.getValue(Company.class);
+                    etCompanyName.setText(company.getName());
+                    etCompanyCategory.setText(company.getCategory());
+                    etCompanyTime.setText(company.getTime());
+                    etCompanyTax.setText(String.valueOf(company.getTax()));
+
+                    urlSelectedImage = company.getUrlImage();
+
+                    if (urlSelectedImage != "") {
+                        Picasso.get().load(urlSelectedImage).into(civCompanyImage);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

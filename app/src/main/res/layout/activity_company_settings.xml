@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -62,7 +63,7 @@
             android:layout_marginTop="-2dp"
             android:background="@drawable/edit_text_bg"
             android:hint="Delivery Price"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             android:padding="16dp" />
 
         <Button
