@@ -76,7 +76,11 @@ public class MainActivity extends AppCompatActivity {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        Company selectedCompany = companies.get(position);
 
+                        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                        intent.putExtra("company", selectedCompany);
+                        startActivity(intent);
                     }
 
                     @Override

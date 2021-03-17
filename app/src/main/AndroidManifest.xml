@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="activities.UserSettingsActivity"
+        <activity android:name="activities.MenuActivity"
             android:parentActivityName="activities.MainActivity"/>
+        <activity
+            android:name="activities.UserSettingsActivity"
+            android:parentActivityName="activities.MainActivity" />
         <activity
             android:name="activities.NewCompanyProductActivity"
             android:parentActivityName="activities.CompanyActivity" />
