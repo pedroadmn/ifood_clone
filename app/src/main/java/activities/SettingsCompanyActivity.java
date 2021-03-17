@@ -192,7 +192,7 @@ public class SettingsCompanyActivity extends AppCompatActivity {
 
                     urlSelectedImage = company.getUrlImage();
 
-                    if (urlSelectedImage != "") {
+                    if (urlSelectedImage != null && !urlSelectedImage.equals("")) {
                         Picasso.get().load(urlSelectedImage).into(civCompanyImage);
                     }
                 }
