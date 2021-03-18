@@ -115,9 +115,21 @@ public class Order {
         this.observation = observation;
     }
 
+    public void remove() {
+        DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
+        DatabaseReference ordersUsersRef = firebaseRef.child("orders_users").child(getCompanyId()).child(getUserId());
+        ordersUsersRef.removeValue();
+    }
+
     public void save() {
         DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
         DatabaseReference ordersUsersRef = firebaseRef.child("orders_users").child(getCompanyId()).child(getUserId());
         ordersUsersRef.setValue(this);
+    }
+
+    public void confirm() {
+        DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
+        DatabaseReference ordersRef = firebaseRef.child("orders").child(getCompanyId()).child(getOrderId());
+        ordersRef.setValue(this);
     }
 }

@@ -71,6 +71,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private int qttCarItems = 0;
     private Double totalCar = 0.0;
+    private int paymentMethod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -286,8 +287,47 @@ public class MenuActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.confirmOrderMenu:
+                confirmOrder();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void confirmOrder() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Select a payment method");
+
+        CharSequence[] items = new CharSequence[] {
+                "Money",
+                "Credit Card"
+        };
+
+        builder.setSingleChoiceItems(items, 0, (dialogInterface, i) -> {
+            paymentMethod = i;
+        });
+
+        EditText etObservation = new EditText(this);
+        etObservation.setHint("Type an observation");
+
+        builder.setView(etObservation);
+
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
+
+        });
+
+        builder.setPositiveButton("Confirm", (dialogInterface, i) -> {
+            String observation = etObservation.getText().toString();
+            recoveredOrder.setPaymentType(paymentMethod);
+            recoveredOrder.setObservation(observation);
+            recoveredOrder.setStatus("Confirmed");
+            recoveredOrder.confirm();
+
+            recoveredOrder.remove();
+            recoveredOrder = null;
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
