@@ -6,4 +6,5 @@
     <string name="logout">Logout</string>
     <string name="newProduct">New Product</string>
     <string name="confirmOrder">Confirm Order</string>
+    <string name="orders">Orders</string>
 </resources>

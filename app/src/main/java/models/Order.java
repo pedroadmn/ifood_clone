@@ -2,6 +2,7 @@ package models;
 
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.HashMap;
 import java.util.List;
 
 import helpers.FirebaseConfig;
@@ -131,5 +132,14 @@ public class Order {
         DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
         DatabaseReference ordersRef = firebaseRef.child("orders").child(getCompanyId()).child(getOrderId());
         ordersRef.setValue(this);
+    }
+
+    public void updateStatus() {
+        HashMap<String, Object> status = new HashMap<>();
+        status.put("status", getStatus());
+
+        DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
+        DatabaseReference ordersRef = firebaseRef.child("orders").child(getCompanyId()).child(getOrderId());
+        ordersRef.updateChildren(status);
     }
 }

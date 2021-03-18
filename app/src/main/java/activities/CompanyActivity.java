@@ -109,8 +109,12 @@ public class CompanyActivity extends AppCompatActivity {
             case R.id.configMenu:
                 goToSettings();
                 break;
+            case R.id.orderMenu:
+                goToOrders();
+                break;
             case R.id.newProductMenu:
                 openNewProduct();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -125,6 +129,10 @@ public class CompanyActivity extends AppCompatActivity {
 
     private void goToSettings() {
         startActivity(new Intent(this, SettingsCompanyActivity.class));
+    }
+
+    private void goToOrders() {
+        startActivity(new Intent(this, OrdersActivity.class));
     }
 
     private void openNewProduct() {
